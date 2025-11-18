@@ -1,0 +1,357 @@
+<!--
+Game Developer Portfolio Template — Easy-Edit + Video Embeds
+File: index.html
+
+HOW TO EDIT (quick):
+1. Edit the SITE_CONFIG JavaScript object below — it's the single place to change your name, bio, contact, and projects.
+2. For each project add: title, subtitle, img (path), video (youtube/vimeo URL or local asset path), demo, repo, desc, tags (comma-separated).
+3. Put images/videos/resume into the /assets folder.
+4. Save and push to GitHub Pages (detailed steps in the chat below).
+
+This single-file template auto-builds the page from SITE_CONFIG so you don't need to touch HTML/CSS later — just edit the JS object.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YOUR NAME — Game Dev Portfolio</title>
+  <meta name="description" content="Portfolio — Game Developer" />
+  <link rel="icon" href="assets/favicon.png" />
+  <style>
+    :root{--bg:#071024;--card:#0b1220;--muted:#94a3b8;--accent:#7c3aed;--glass:rgba(255,255,255,0.03);--max-width:1100px;--radius:12px;color-scheme:dark;font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    *{box-sizing:border-box}html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#041021);color:#e6eef8}
+    a{color:inherit} .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{height:56px;width:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav{display:flex;gap:10px;align-items:center}
+    nav a{padding:8px 12px;border-radius:8px;color:var(--muted);font-size:14px}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center;padding:24px 0}
+    .hero-left h2{margin:0;font-size:34px}
+    .muted{color:var(--muted)}.sub{margin-top:10px;font-size:15px}
+    .cta{margin-top:16px;display:flex;gap:10px}
+    .btn{background:linear-gradient(90deg,var(--accent),#3b82f6);padding:10px 14px;border-radius:10px;color:white;font-weight:600}
+    .ghost{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:16px}
+    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .skill{background:var(--glass);padding:8px 10px;border-radius:8px;font-size:13px;color:var(--muted)}
+
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+    .project{border-radius:10px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);cursor:pointer;display:flex;flex-direction:column}
+    .project-media{height:160px;background:#071022;display:flex;align-items:center;justify-content:center}
+    .project-media img{width:100%;height:100%;object-fit:cover}
+    .project-body{padding:12px}
+    .project-title{font-weight:700}
+    .tags{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{background:linear-gradient(180deg,#071126,#0f1724);max-width:900px;width:100%;border-radius:10px;padding:16px}
+    .modal-media{height:320px;background:#000;border-radius:8px;overflow:hidden}
+    .modal-media iframe,.modal-media video{width:100%;height:100%;border:0}
+
+    footer{margin-top:36px;padding:20px 0;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.nav{display:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1 id="siteName">YOUR NAME</h1>
+          <div class="muted" id="siteTag">Game Developer — Engine | Systems | Tools</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a class="ghost" id="resumeLink" href="assets/Resume.pdf" target="_blank">Resume</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h2 id="heroTitle">Hi — I'm <span id="heroName">YOUR NAME</span></h2>
+        <div class="sub muted" id="heroBio">I build performant gameplay systems and tools for modern games.</div>
+        <div class="cta">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="ghost" id="emailLink" href="mailto:you@example.com">Contact</a>
+        </div>
+
+        <div class="skills" id="skillList" style="margin-top:18px">
+          <!-- skills inserted dynamically -->
+        </div>
+      </div>
+
+      <aside class="card">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="height:72px;width:72px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:26px" id="logoText">GD</div>
+          <div>
+            <div id="cardName" style="font-weight:700">YOUR NAME</div>
+            <div class="muted" id="cardTag">Gameplay Engineer</div>
+          </div>
+        </div>
+        <div style="margin-top:12px" id="quickStats">
+          <!-- stats inserted dynamically -->
+        </div>
+      </aside>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="card">
+        <h3>Skills</h3>
+        <p class="muted">A snapshot of tools and systems I use.</p>
+        <div id="skillsWrap" style="margin-top:12px"></div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <h3>Projects</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <label class="muted">Filter:</label>
+          <select id="filterTags" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)">
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid"></div>
+
+      <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal">
+          <button id="closeModal" style="float:right;">Close</button>
+          <h3 id="modalTitle">Project Title</h3>
+          <div class="modal-media" id="modalMedia"></div>
+          <p class="muted" id="modalSubtitle"></p>
+          <p id="modalDesc"></p>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <a class="btn" id="modalDemo" href="#" target="_blank">Live demo</a>
+            <a class="ghost" id="modalRepo" href="#" target="_blank">Source</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <h3>Experience</h3>
+      <div class="card" id="experienceWrap"></div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="card" style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+        <div style="flex:1;min-width:260px">
+          <h3>Contact</h3>
+          <p class="muted">Email me or download my resume. Add GitHub, LinkedIn, or a demo reel below.</p>
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+            <a class="btn" id="emailBtn" href="mailto:you@example.com">Email</a>
+            <a class="ghost" id="resumeBtn" href="assets/Resume.pdf" target="_blank">Resume</a>
+          </div>
+        </div>
+        <div style="min-width:260px">
+          <h4 class="muted">Social</h4>
+          <div style="display:flex;gap:8px;margin-top:8px" id="socialLinks"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> YOUR NAME — Game Developer</div>
+      <div class="muted">Built with a single-file editable template</div>
+    </footer>
+  </div>
+
+  <script>
+    // ========== SITE CONFIG (EDIT HERE) ===========
+    // Edit only this object to change content. Keep the structure.
+    const SITE_CONFIG = {
+      name: 'YOUR NAME',
+      tag: 'Game Developer — Engine | Systems | Tools',
+      bio: 'I build performant gameplay systems, author tools, and realtime systems. Click projects to see videos and demos.',
+      email: 'you@example.com',
+      resume: 'assets/Resume.pdf',
+      skills: ['C++ (Modern)','Unreal Engine 5','Custom Engines','Gameplay Systems','Multithreading','Networking','Tools/Editor Plugins','Profiling & Optimization'],
+      stats: [
+        {label:'Projects',value:'8'},
+        {label:'Lines',value:'125k+'},
+        {label:'Engines',value:'Unreal / Custom'}
+      ],
+
+      // Projects array: for video you can provide either:
+      //  - a YouTube/Vimeo url (iframe embed will be used)
+      //  - a path to a local video in /assets (e.g. 'assets/myclip.mp4') which will use the <video> tag
+      projects: [
+        {
+          title:'Zero-G Platformer',
+          subtitle:'C++ / Unreal — Gameplay systems, procedural movement',
+          img:'assets/project1.jpg',
+          video:'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          demo:'#',
+          repo:'#',
+          desc:'Designed movement and state system for low-gravity traversal. Implemented robust collision and camera smoothing.',
+          tags:'gameplay,unreal,ai'
+        },
+        {
+          title:'Animation Pipeline Tool',
+          subtitle:'Python / Editor Plugin — Batch import & retargeter',
+          img:'assets/project2.jpg',
+          video:'assets/anim_tool_demo.mp4',
+          demo:'#',
+          repo:'#',
+          desc:'Editor plugin to batch import and retarget animations. Includes UI and automated report generation.',
+          tags:'tools,editor'
+        }
+      ],
+
+      experience: [
+        {role:'Senior Gameplay Engineer — STUDIO',date:'2021 — 2024',desc:'Worked on combat systems, data-driven ability system, and refactored job system for 18% frame-time improvement.'},
+        {role:'Engine Tools Developer — Freelance',date:'2019 — 2021',desc:'Built editor plugins to automate art pipelines and reduced import time by 60%.'}
+      ],
+
+      social: [
+        {label:'GitHub',href:'https://github.com/yourusername'},
+        {label:'LinkedIn',href:'https://www.linkedin.com/in/yourprofile'},
+        {label:'Demo Reel',href:'https://vimeo.com/'}
+      ]
+    };
+    // ========== END CONFIG ===========
+
+    // Small DOM builder: you don't need to touch anything below
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('siteName').textContent = SITE_CONFIG.name;
+    document.getElementById('siteTag').textContent = SITE_CONFIG.tag;
+    document.getElementById('heroName').textContent = SITE_CONFIG.name;
+    document.getElementById('heroBio').textContent = SITE_CONFIG.bio;
+    document.getElementById('emailLink').href = `mailto:${SITE_CONFIG.email}`;
+    document.getElementById('emailBtn').href = `mailto:${SITE_CONFIG.email}`;
+    document.getElementById('resumeBtn').href = SITE_CONFIG.resume;
+    document.getElementById('resumeLink').href = SITE_CONFIG.resume;
+    document.getElementById('cardName').textContent = SITE_CONFIG.name;
+    document.getElementById('cardTag').textContent = SITE_CONFIG.tag;
+    document.getElementById('logoText').textContent = SITE_CONFIG.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+
+    // skills
+    const skillsWrap = document.getElementById('skillsWrap');
+    SITE_CONFIG.skills.forEach(s=>{
+      const d = document.createElement('div'); d.className='skill'; d.textContent=s; skillsWrap.appendChild(d);
+    });
+
+    // stats
+    const stats = document.getElementById('quickStats');
+    SITE_CONFIG.stats.forEach(s=>{
+      const el = document.createElement('div'); el.style.marginTop='8px'; el.innerHTML=`<div class=\"muted\">${s.label}</div><div style=\"font-weight:700\">${s.value}</div>`; stats.appendChild(el);
+    });
+
+    // filter tags
+    const filter = document.getElementById('filterTags');
+    const tagsSet = new Set(); tagsSet.add('all');
+
+    // projects
+    const grid = document.getElementById('projectsGrid');
+    SITE_CONFIG.projects.forEach((p,idx)=>{
+      // collect tags
+      (p.tags||'').split(',').map(t=>t.trim()).filter(Boolean).forEach(t=>tagsSet.add(t));
+
+      const card = document.createElement('div'); card.className='project card'; card.dataset.index=idx;
+      card.dataset.tags = p.tags || '';
+
+      const media = document.createElement('div'); media.className='project-media';
+      if(p.img){ const img = document.createElement('img'); img.src=p.img; img.alt = p.title; media.appendChild(img);} else { media.textContent='No image' }
+      card.appendChild(media);
+
+      const body = document.createElement('div'); body.className='project-body';
+      body.innerHTML=`<div class=\"project-title\">${p.title}</div><div class=\"muted\" style=\"font-size:13px\">${p.subtitle||''}</div>`;
+      const tagWrap = document.createElement('div'); tagWrap.className='tags'; (p.tags||'').split(',').map(t=>t.trim()).filter(Boolean).forEach(t=>{ const tg=document.createElement('div'); tg.className='tag'; tg.textContent=t; tagWrap.appendChild(tg)});
+      body.appendChild(tagWrap);
+      card.appendChild(body);
+
+      // store data for modal
+      card.dataset.desc = p.desc || '';
+      card.dataset.demo = p.demo || '';
+      card.dataset.repo = p.repo || '';
+      card.dataset.video = p.video || '';
+
+      card.addEventListener('click', ()=> openModal(card));
+      grid.appendChild(card);
+    });
+
+    // populate filter select
+    Array.from(tagsSet).sort().forEach(t=>{
+      const opt = document.createElement('option'); opt.value=t; opt.textContent = t[0].toUpperCase()+t.slice(1); filter.appendChild(opt);
+    });
+
+    filter.addEventListener('change', ()=>{
+      const val = filter.value;
+      document.querySelectorAll('.project').forEach(p=>{
+        if(val==='all') return p.style.display='flex';
+        p.style.display = (p.dataset.tags||'').includes(val) ? 'flex' : 'none';
+      });
+    });
+
+    // modal
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMedia = document.getElementById('modalMedia');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalDemo = document.getElementById('modalDemo');
+    const modalRepo = document.getElementById('modalRepo');
+    const closeModal = document.getElementById('closeModal');
+
+    function openModal(card){
+      const idx = card.dataset.index; const p = SITE_CONFIG.projects[idx];
+      modalTitle.textContent = p.title;
+      modalSubtitle.textContent = p.subtitle || '';
+      modalDesc.textContent = p.desc || '';
+      modalDemo.href = p.demo || '#'; modalRepo.href = p.repo || '#';
+
+      // clear media
+      modalMedia.innerHTML = '';
+      const v = p.video || '';
+      if(!v){ modalMedia.textContent = 'No media provided'; }
+      else if(v.includes('youtube.com') || v.includes('youtu.be') || v.includes('vimeo.com')){
+        // construct embed iframe for youtube or vimeo
+        let embed = '';
+        if(v.includes('youtube')){
+          // support youtu.be short links too
+          const id = (v.includes('youtu.be') ? v.split('/').pop() : (new URL(v)).searchParams.get('v')) || '';
+          embed = `https://www.youtube.com/embed/${id}`;
+        } else if(v.includes('vimeo')){
+          // naive vimeo id
+          const id = v.split('/').pop(); embed = `https://player.vimeo.com/video/${id}`;
+        }
+        const iframe = document.createElement('iframe'); iframe.src = embed; iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'; iframe.allowFullscreen = true; modalMedia.appendChild(iframe);
+      } else {
+        // assume local asset — use <video>
+        const video = document.createElement('video'); video.src = v; video.controls = true; video.preload='metadata'; modalMedia.appendChild(video);
+      }
+
+      modalBackdrop.style.display = 'flex';
+    }
+
+    closeModal.addEventListener('click', ()=> modalBackdrop.style.display = 'none');
+    modalBackdrop.addEventListener('click', (e)=>{ if(e.target===modalBackdrop) modalBackdrop.style.display='none' });
+
+    // experience
+    const expWrap = document.getElementById('experienceWrap');
+    SITE_CONFIG.experience.forEach(e=>{
+      const item = document.createElement('div'); item.style.marginBottom='12px'; item.innerHTML = `<div style=\"font-weight:700\">${e.role}</div><div class=\"muted\" style=\"font-size:13px\">${e.date}</div><div class=\"muted\" style=\"margin-top:6px\">${e.desc}</div>`; expWrap.appendChild(item);
+    });
+
+    // social
+    const social = document.getElementById('socialLinks');
+    SITE_CONFIG.social.forEach(s=>{ const a=document.createElement('a'); a.className='ghost'; a.href=s.href; a.target='_blank'; a.style.padding='8px 10px'; a.textContent=s.label; social.appendChild(a); });
+
+    // Helpful: console instructions for editing quickly
+    console.log('Edit SITE_CONFIG at top of this file to update content. Add assets into /assets folder.');
+  </script>
+</body>
+</html>
