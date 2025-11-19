@@ -188,9 +188,47 @@ This single-file template auto-builds the page from SITE_CONFIG so you don't nee
       ],
       projects: [],
       experience: [
-        {role:'XR Software Engineer — Launchvox Inc (San Francisco, CA)',date:'Jan. 2024 - Jun. 2025',desc:'Collaborated on an analytics system using DynamoDB; implemented multiplayer networking in Unity with Photon; developed a cross-engine plugin supporting persistent network connections in Unity and Unreal; designed and implemented a drag-and-drop interaction system; optimized performance in a cataract surgery simulator; and integrated reusable VR UI components.'},
-        {role:'Contract Software Engineer — Launchvox Inc',date:'Sep. 2023 - Dec. 2023',desc:'Supported product development across both Unity and Unreal environments as contract engineer.'},
-        {role:'XR Software Engineer — Elara Systems Inc (Sacramento, CA)',date:'Jan. 2022 - Mar. 2023',desc:'Led expansion of drill-based VR training simulator; integrated IK, pathfinding, and ambient state systems; built interactive medical VR video player; created dynamic environmental events; redesigned multiplayer flow and collaborated with art teams on new network UI.'}
+        {
+          company:'Force Multiplier Studios',
+          logo:'assets/logos/force.png',
+          link:'https://www.forcemultiplierstudios.com',
+          roles:[
+            {
+              title:'Gameplay Engineer',
+              date:'Jun. 2025 - Present',
+              desc:''
+            }
+          ]
+        },
+        {
+          company:'Launchvox Inc',
+          logo:'assets/logos/launchvox.png',
+          link:'https://launchvox.com',
+          roles:[
+            {
+              title:'XR Software Engineer',
+              date:'Jan. 2024 - Jun. 2025',
+              desc:'Collaborated on an analytics system using DynamoDB; implemented multiplayer networking in Unity with Photon; developed a cross-engine plugin supporting persistent network connections in Unity and Unreal; designed and implemented a drag-and-drop interaction system; optimized performance in a cataract surgery simulator; and integrated reusable VR UI components.'
+            },
+            {
+              title:'Contract Software Engineer',
+              date:'Sep. 2023 - Dec. 2023',
+              desc:'Supported product development across both Unity and Unreal environments as contract engineer.'
+            }
+          ]
+        },
+        {
+          company:'Elara Systems Inc',
+          logo:'assets/logos/elara.png',
+          link:'https://www.elarasystems.com',
+          roles:[
+            {
+              title:'XR Software Engineer',
+              date:'Jan. 2022 - Mar. 2023',
+              desc:'Led expansion of drill-based VR training simulator; integrated IK, pathfinding, and ambient state systems; built interactive medical VR video player; created dynamic environmental events; redesigned multiplayer flow and collaborated with art teams on new network UI.'
+            }
+          ]
+        }
       ],
       social: [
         {label:'LinkedIn',href:'https://linkedin.com/in/maxfield-friedman'},
@@ -319,7 +357,40 @@ This single-file template auto-builds the page from SITE_CONFIG so you don't nee
     // experience
     const expWrap = document.getElementById('experienceWrap');
     SITE_CONFIG.experience.forEach(e=>{
-      const item = document.createElement('div'); item.style.marginBottom='12px'; item.innerHTML = `<div style=\"font-weight:700\">${e.role}</div><div class=\"muted\" style=\"font-size:13px\">${e.date}</div><div class=\"muted\" style=\"margin-top:6px\">${e.desc}</div>`; expWrap.appendChild(item);
+      const item = document.createElement('div');
+      item.style.marginBottom='24px';
+      item.style.display='flex';
+      item.style.gap='12px';
+      item.style.alignItems='flex-start';
+
+      const logo = e.logo 
+        ? `<img src="${e.logo}" style="width:48px;height:48px;border-radius:6px;object-fit:contain;background:#0002;flex-shrink:0" />`
+        : '';
+
+      const company = e.link
+        ? `<a href="${e.link}" target="_blank" style="font-weight:700;font-size:16px;display:block;margin-bottom:4px;">${e.company}</a>`
+        : `<div style="font-weight:700;font-size:16px;margin-bottom:4px;">${e.company}</div>`;
+
+      let rolesHTML = '';
+      if(e.roles && e.roles.length){
+        rolesHTML = e.roles.map(r=>`
+          <div style="margin-bottom:10px;">
+            <div style="font-weight:600">${r.title}</div>
+            <div class="muted" style="font-size:13px">${r.date || ''}</div>
+            <div class="muted" style="margin-top:4px">${r.desc || ''}</div>
+          </div>
+        `).join('');
+      }
+
+      item.innerHTML = `
+        ${logo}
+        <div>
+          ${company}
+          ${rolesHTML}
+        </div>
+      `;
+
+      expWrap.appendChild(item);
     });
 
     // social
