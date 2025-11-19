@@ -4,34 +4,37 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Maxfield Friedman — Game Dev Portfolio</title>
-  <meta name="description" content="Portfolio — Game Developer" />
+  <meta name="description" content="Portfolio — Gameplay & XR Engineer" />
   <link rel="icon" href="assets/favicon.png" />
 
   <style>
     :root {
-      --background:#0f1210;              /* Solid warm-dark background */
-      --card-top:rgba(0,0,0,0.75);       /* Dark glass gradient */
-      --card-bottom:rgba(80,80,80,0.45); /* Grey glass gradient */
-      --icon:#001702;                    /* Your chosen icon/accent color */
-      --accent:#acafa9;
-      --text:#e2e2e2;
-      --muted:#bdbdbd;
-      --radius:12px;
+      /* ===== Global Theme ===== */
+      --background:#0f1210;              /* Warm dark background */
+      --text:#e7d9b8;                    /* Soft sandy text */
+      --muted:#c3b79b;                   /* Muted sandy */
+      --accent:#001702;                  /* Your chosen moss green accent */
+      
+      --card-top:rgba(0,0,0,0.78);       /* Dark glass */
+      --card-bottom:rgba(80,80,80,0.40); /* Grey glass */
+
+      --radius:14px;
       --max-width:1100px;
+
       font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
       color-scheme:dark;
     }
 
-    /* ===== Page Background ===== */
+    /* ===== Base ===== */
     html, body {
       margin:0;
-      height:100%;
+      padding:0;
       background:var(--background);
       color:var(--text);
     }
 
     * { box-sizing:border-box }
-    a { color:inherit }
+    a { color:inherit; text-decoration:none; }
 
     .container {
       max-width:var(--max-width);
@@ -44,129 +47,135 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
+      padding:8px 0;
     }
 
-    .brand { display:flex; gap:12px; align-items:center }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
 
     .logo {
-      height:56px;
       width:56px;
+      height:56px;
+      background:var(--accent);
+      color:#fff;
       border-radius:10px;
-      background:var(--icon);
-      color:#ffffff;
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:700;
-      font-size:20px;
+      font-size:22px;
     }
 
     nav {
       display:flex;
-      gap:10px;
-      align-items:center;
+      gap:14px;
     }
 
     nav a {
-      padding:8px 12px;
+      padding:8px 14px;
       border-radius:8px;
       background:rgba(255,255,255,0.1);
-      color:var(--icon);
+      color:var(--accent);
       font-weight:600;
+      transition:0.2s;
     }
 
-    /* ===== Hero Section ===== */
+    nav a:hover {
+      background:rgba(255,255,255,0.18);
+    }
+
+    /* ===== Hero ===== */
     .hero {
+      margin-top:32px;
       display:grid;
       grid-template-columns:1fr 360px;
       gap:32px;
-      align-items:center;
-      padding:32px 0;
     }
 
-    .hero h2 {
+    h2 {
       margin:0;
-      font-size:34px;
-      color:#ffffff;
+      font-size:36px;
+      color:#fff;
     }
 
     .sub {
-      margin-top:10px;
       color:var(--muted);
-      font-size:16px;
+      margin-top:10px;
+      font-size:17px;
     }
 
     .cta {
       margin-top:20px;
       display:flex;
-      gap:10px;
+      gap:12px;
     }
 
     .btn {
-      background:var(--icon);
-      padding:10px 16px;
+      background:var(--accent);
+      padding:12px 18px;
       border-radius:10px;
-      color:#fff;
       font-weight:600;
+      color:#fff;
     }
 
     .ghost {
-      padding:10px 16px;
+      padding:12px 18px;
       border-radius:10px;
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25);
       color:var(--muted);
+      background:transparent;
     }
 
-    /* ===== Solid hero card ===== */
+    /* ===== Solid Hero Card ===== */
     .card-hero {
-      background:#000000;
+      background:#000;
+      color:#fff;
       border-radius:var(--radius);
       padding:20px;
-      color:#ffffff;
     }
 
-    /* ===== Glass cards (skills, projects, experience, contact) ===== */
+    /* ===== Glass Cards ===== */
     .card {
       background:linear-gradient(180deg, var(--card-top), var(--card-bottom));
+      color:var(--text);
       border-radius:var(--radius);
       padding:20px;
-      color:#ffffff;
       backdrop-filter:blur(8px);
     }
 
     /* ===== Skills Grid ===== */
     #skillsWrap {
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
       gap:14px;
-      margin-top:20px;
+      margin-top:18px;
     }
 
     .skill {
       background:rgba(255,255,255,0.10);
       padding:10px 14px;
-      border-radius:10px;
-      color:#ffffff;
       text-align:center;
+      border-radius:10px;
       font-weight:600;
-      font-size:14px;
+      color:var(--text);
       border:1px solid rgba(255,255,255,0.06);
     }
 
     /* ===== Projects ===== */
     .projects-grid {
+      margin-top:20px;
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:20px;
-      margin-top:24px;
     }
 
     .project {
-      border-radius:12px;
-      overflow:hidden;
       background:linear-gradient(180deg, var(--card-top), var(--card-bottom));
+      border-radius:var(--radius);
+      overflow:hidden;
       display:flex;
       flex-direction:column;
       cursor:pointer;
@@ -175,7 +184,7 @@
 
     .project-media {
       height:180px;
-      background:#000000aa;
+      background:#00000055;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -187,46 +196,52 @@
       object-fit:cover;
     }
 
-    .project-body {
-      padding:16px;
-    }
+    .project-body { padding:16px; }
 
     .project-title {
       font-weight:700;
+      color:#fff;
       font-size:18px;
       margin-bottom:6px;
     }
 
-    .tags {
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-
     .tag {
+      display:inline-block;
+      margin-right:6px;
+      margin-top:6px;
       padding:6px 10px;
-      font-size:12px;
+      background:rgba(255,255,255,0.12);
       border-radius:8px;
-      background:rgba(255,255,255,0.08);
-      color:#fff;
+      color:var(--text);
+      font-size:12px;
     }
 
     /* ===== Experience ===== */
     .experience-item {
+      padding:20px;
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, var(--card-top), var(--card-bottom));
+      margin-bottom:20px;
       display:flex;
       gap:16px;
-      margin-bottom:24px;
-      align-items:flex-start;
+    }
+
+    .experience-item img {
+      width:48px;
+      height:48px;
+      border-radius:8px;
+      object-fit:contain;
+      background:#00000055;
     }
 
     /* ===== Contact ===== */
     .social-link {
-      padding:8px 12px;
-      background:rgba(255,255,255,0.1);
+      padding:10px 14px;
+      background:rgba(255,255,255,0.12);
+      color:var(--accent);
       border-radius:8px;
-      color:var(--icon);
       font-weight:600;
+      display:inline-block;
     }
 
     /* ===== Footer ===== */
@@ -238,10 +253,8 @@
       color:var(--muted);
     }
 
-    @media(max-width:900px) {
-      .hero {
-        grid-template-columns:1fr;
-      }
+    @media(max-width:900px){
+      .hero { grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -279,22 +292,22 @@
         </div>
       </div>
 
+      <!-- Hero Stat Card -->
       <aside class="card-hero">
-        <div style="display:flex;gap:12px;align-items:center;">
+        <div style="display:flex;gap:14px;align-items:center;">
           <div style="
-            height:72px;
-            width:72px;
+            width:72px;height:72px;
+            background:var(--accent);
             border-radius:10px;
-            background:var(--icon);
-            color:#fff;
-            font-size:26px;
             display:flex;
             align-items:center;
             justify-content:center;
-            font-weight:700;">MF</div>
+            font-size:28px;
+            font-weight:700;
+            color:#fff;">MF</div>
 
           <div>
-            <div id="cardName" style="font-weight:700">Maxfield Friedman</div>
+            <div id="cardName" style="font-weight:700;font-size:18px;">Maxfield Friedman</div>
             <div class="sub" id="cardTag">Gameplay/XR Engineer</div>
           </div>
         </div>
@@ -306,7 +319,7 @@
     <!-- SKILLS -->
     <section id="skills">
       <div class="card">
-        <h3>Skills</h3>
+        <h3 style="margin-top:0;color:#fff;">Skills</h3>
         <p style="color:var(--muted)">A snapshot of tools and systems I use.</p>
         <div id="skillsWrap"></div>
       </div>
@@ -314,31 +327,31 @@
 
     <!-- PROJECTS -->
     <section id="projects">
-      <h3>Projects</h3>
+      <h3 style="color:#fff;">Projects</h3>
       <div class="projects-grid" id="projectsGrid"></div>
     </section>
 
     <!-- EXPERIENCE -->
     <section id="experience">
-      <h3>Experience</h3>
+      <h3 style="color:#fff;">Experience</h3>
       <div id="experienceWrap"></div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-      <div class="card" style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
+      <div class="card" style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;">
         <div style="flex:1;min-width:260px;">
-          <h3>Contact</h3>
+          <h3 style="color:#fff;">Contact</h3>
           <p style="color:var(--muted)">Reach out or download my resume.</p>
 
-          <div style="margin-top:12px;display:flex;gap:10px;">
+          <div style="display:flex;gap:12px;margin-top:12px;">
             <a class="btn" id="emailBtn" href="mailto:maxfield.friedman12@gmail.com">Email</a>
           </div>
         </div>
 
         <div style="min-width:260px;">
-          <h4>Social</h4>
-          <div style="display:flex;gap:10px;margin-top:10px" id="socialLinks"></div>
+          <h4 style="color:#fff;">Social</h4>
+          <div id="socialLinks" style="display:flex;gap:12px;margin-top:10px;"></div>
         </div>
       </div>
     </section>
@@ -352,26 +365,26 @@
 
 <script>
   const SITE_CONFIG = {
-    name: "Maxfield Friedman",
-    tag: "Gameplay/XR Engineer",
-    bio: "Bio coming soon...",
-    email: "maxfield.friedman12@gmail.com",
+    name:"Maxfield Friedman",
+    tag:"Gameplay/XR Engineer",
+    bio:"Bio coming soon...",
+    email:"maxfield.friedman12@gmail.com",
 
-    skills: [
+    skills:[
       "C#", "C++", "Unreal Engine", "Unity", "UEFN", "Blueprints",
       "Verse", "Networking", "Gameplay Systems", "VR/XR",
       "SteamVR", "OpenXR", "3D Math", "Game AI", "UI/UX"
     ],
 
-    stats: [
+    stats:[
       {label:"Experience", value:"3+ Years"},
       {label:"Engines", value:"Unity + Unreal + UEFN"},
       {label:"Specialty", value:"Gameplay & XR Systems"}
     ],
 
-    projects: [],
+    projects:[],
 
-    experience: [
+    experience:[
       {
         company:"Force Multiplier Studios",
         logo:"assets/logos/fmsLogo.png",
@@ -386,12 +399,12 @@
           {
             title:"XR Software Engineer",
             date:"Jan. 2024 - Jun. 2025",
-            desc:"Collaborated on Unity/Unreal systems, Photon networking, VR interaction systems, and performance optimization."
+            desc:"Worked on Unity/Unreal systems, Photon networking, VR interaction design, and optimization."
           },
           {
             title:"Contract Software Engineer",
             date:"Sep. 2023 - Dec. 2023",
-            desc:"Supported development across Unity & Unreal as a contract engineer."
+            desc:"Assisted production teams across Unity & Unreal."
           }
         ]
       },
@@ -402,81 +415,83 @@
           {
             title:"XR Software Engineer",
             date:"Jan. 2022 - Mar. 2023",
-            desc:"Led expansion of VR training simulator; integrated IK, pathfinding, ambient AI, and redesigned networked UI."
+            desc:"Expanded VR training systems with IK, pathfinding, ambient state machines, and multiplayer UI flow."
           }
         ]
       }
     ],
 
-    social: [
+    social:[
       {label:"LinkedIn", href:"https://linkedin.com/in/maxfield-friedman"},
       {label:"GitHub", href:"https://github.com"}
     ]
   };
 
-  // Inject basics
+  /* ===== Inject Content ===== */
+
   document.getElementById("year").textContent = new Date().getFullYear();
+
   document.getElementById("siteName").textContent = SITE_CONFIG.name;
   document.getElementById("heroName").textContent = SITE_CONFIG.name;
   document.getElementById("heroBio").textContent = SITE_CONFIG.bio;
   document.getElementById("siteTag").textContent = SITE_CONFIG.tag;
   document.getElementById("cardName").textContent = SITE_CONFIG.name;
   document.getElementById("cardTag").textContent = SITE_CONFIG.tag;
+
   document.getElementById("emailLink").href = `mailto:${SITE_CONFIG.email}`;
   document.getElementById("emailBtn").href = `mailto:${SITE_CONFIG.email}`;
 
-  // Stats
-  const stats = document.getElementById("quickStats");
-  SITE_CONFIG.stats.forEach(s => {
-    const div = document.createElement("div");
-    div.style.marginTop = "8px";
-    div.innerHTML = `<div class="sub" style="font-size:14px">${s.label}</div>
-                     <div style="font-weight:700;font-size:16px">${s.value}</div>`;
-    stats.appendChild(div);
-  });
-
-  // Skills
+  /* Skills */
   const skillsWrap = document.getElementById("skillsWrap");
-  SITE_CONFIG.skills.forEach(s => {
-    const d = document.createElement("div");
-    d.className = "skill";
-    d.textContent = s;
+  SITE_CONFIG.skills.forEach(s=>{
+    const d=document.createElement("div");
+    d.className="skill";
+    d.textContent=s;
     skillsWrap.appendChild(d);
   });
 
-  // Experience
-  const expWrap = document.getElementById("experienceWrap");
-  SITE_CONFIG.experience.forEach(e => {
-    const div = document.createElement("div");
-    div.className = "experience-item";
+  /* Stats */
+  const stats = document.getElementById("quickStats");
+  SITE_CONFIG.stats.forEach(s=>{
+    const el=document.createElement("div");
+    el.style.marginTop="10px";
+    el.innerHTML = `<div class="sub">${s.label}</div>
+                    <div style="font-weight:700;font-size:18px">${s.value}</div>`;
+    stats.appendChild(el);
+  });
 
+  /* Experience */
+  const expWrap = document.getElementById("experienceWrap");
+  SITE_CONFIG.experience.forEach(e=>{
+    const div=document.createElement("div");
+    div.className="experience-item";
     div.innerHTML = `
-      <img src="${e.logo}" style="width:48px;height:48px;border-radius:6px;object-fit:contain;background:#00000055" />
+      <img src="${e.logo}" />
       <div>
-        <div style="font-weight:700;font-size:17px">${e.company}</div>
-        ${e.roles.map(r => `
-          <div style="margin-top:6px">
-            <div style="font-weight:600;font-size:15px">${r.title}</div>
-            <div class="sub" style="font-size:13px">${r.date}</div>
-            <div style="margin-top:4px;font-size:14px">${r.desc}</div>
+        <div style="font-weight:700;font-size:18px;color:#fff;">${e.company}</div>
+        ${e.roles.map(r=>`
+          <div style="margin-top:6px;">
+            <div style="font-weight:600;color:#fff;">${r.title}</div>
+            <div class="sub" style="font-size:14px;">${r.date}</div>
+            <div style="margin-top:4px;color:var(--text);font-size:15px;">${r.desc}</div>
           </div>
         `).join("")}
       </div>
     `;
-
     expWrap.appendChild(div);
   });
 
-  // Social
+  /* Social */
   const social = document.getElementById("socialLinks");
-  SITE_CONFIG.social.forEach(s => {
-    const a = document.createElement("a");
-    a.className = "social-link";
-    a.href = s.href;
-    a.textContent = s.label;
-    a.target = "_blank";
+  SITE_CONFIG.social.forEach(s=>{
+    const a=document.createElement("a");
+    a.className="social-link";
+    a.href=s.href;
+    a.target="_blank";
+    a.textContent=s.label;
     social.appendChild(a);
   });
+
 </script>
 
 </body>
