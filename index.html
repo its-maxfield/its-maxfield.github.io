@@ -190,6 +190,24 @@
       border-radius:8px;overflow:hidden;
     }
 
+    /* ===== FIX MODAL LAYERING ===== */
+    .modal-backdrop {
+      z-index: 9999 !important;
+    }
+
+    .modal {
+      z-index: 10000 !important;
+      position: relative;
+    }
+
+    /* ===== FIX VIDEO SIZE ===== */
+    .modal-media iframe,
+    .modal-media video {
+      width: 100% !important;
+      height: 100% !important;
+      border: 0 !important;
+    }
+
     footer{
       margin-top:36px;padding:20px 0;
       color:var(--muted);
